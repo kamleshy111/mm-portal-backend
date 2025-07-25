@@ -1,16 +1,20 @@
-# netlify.toml (Corrected and Simpler)
-[build]
-  # This command tells Netlify to take your src/api.js file and place it
-  # into the required functions directory.
-  command = "mkdir -p dist && cp -r src/* dist/ && cp package.json dist/"
-  
-  # The directory where the built functions are located.
-  functions = "dist/"
+# netlify.toml (Corrected Syntax)
 
-# This is a redirect rule that makes your function accessible
-# at a clean URL. It rewrites all requests to the main function.
-[functions]
-  # This tells Netlify to look for node_modules needed by your functions.
+[build]
+  # This command remains the same. It correctly prepares your files.
+  command = "mkdir -p netlify/functions && cp -r src/* netlify/functions/"
+  functions = "netlify/functions"
+
+# Use a wildcard to apply these settings to ALL functions in this project.
+# This is the correct way to set the Node.js version and bundler.
+[functions."*"]
   node_bundler = "esbuild"
   node_target = "es2022"
   node_version = "20"
+
+# This redirect rule makes your API accessible at a clean URL.
+# For example: your-site.netlify.app/users instead of /.netlify/functions/api/users
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
