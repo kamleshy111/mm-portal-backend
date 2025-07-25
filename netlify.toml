@@ -2,14 +2,15 @@
 [build]
   # This command tells Netlify to take your src/api.js file and place it
   # into the required functions directory.
-  command = "mkdir -p netlify/functions && cp src/api.js netlify/functions/"
+  command = "mkdir -p dist && cp -r src/* dist/ && cp package.json dist/"
   
   # The directory where the built functions are located.
-  functions = "netlify/functions"
+  functions = "dist/"
 
 # This is a redirect rule that makes your function accessible
 # at a clean URL. It rewrites all requests to the main function.
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
+[functions]
+  # This tells Netlify to look for node_modules needed by your functions.
+  node_bundler = "esbuild"
+  node_target = "es2022"
+  node_version = "20"
