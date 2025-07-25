@@ -1,12 +1,21 @@
-# netlify.toml (Simplified and Foolproof)
+# netlify.toml (Final Corrected Version)
 
 [build]
-  # The directory where your serverless functions are located.
-  # We will manually create this folder and put our handler inside.
+  # We will stick with the manual file structure, as it's the most reliable.
+  # This tells Netlify where to find your functions.
   functions = "functions"
 
-# This rule makes your API accessible at a clean URL.
-# For example: your-site.netlify.app/users instead of /functions/api/users
+# Use the wildcard to apply settings to all functions.
+[functions."*"]
+  # This explicitly tells the bundler to NOT bundle axios.
+  # It will be included as a separate module in node_modules.
+  external_node_modules = ["axios"]
+  
+  # We can still specify the Node.js version for consistency.
+  node_version = "20"
+  # We can remove the bundler and target settings, as they can sometimes
+  # conflict with the external module strategy. Let's use Netlify's defaults.
+
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/api/:splat"
