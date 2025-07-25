@@ -1,7 +1,14 @@
-[build]
-  command = "npm run build"
-  functions = "netlify/functions"
+# netlify.toml (Final Self-Contained Directory Version)
 
+[build]
+  # 1. Run our new, robust build script.
+  command = "npm run build"
+  
+  # 2. Tell Netlify that our function code is in the 'dist' directory.
+  # Netlify will find the api.js and the node_modules folder inside.
+  functions = "dist"
+
+# This redirect rule remains the same.
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/api/:splat"

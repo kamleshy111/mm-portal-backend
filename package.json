@@ -7,7 +7,7 @@
     "scripts": {
         "start": "node functions/server.js",
         "dev": "nodemon functions/server.js",
-        "build": "esbuild functions/api.js --bundle --platform=node --outfile=netlify/functions/api.js --external:mongodb-client-encryption --external:aws4 --external:snappy --external:kerberos --external:@mongodb-js/zstd"
+        "build": "rm -rf dist && mkdir -p dist && cp package.json package-lock.json dist/ && cd dist && npm install --omit=dev && cd .. && esbuild functions/api.js --bundle --platform=node --outfile=dist/api.js"
       },
     "keywords": [
         "express",
