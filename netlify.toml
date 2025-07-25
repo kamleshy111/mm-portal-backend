@@ -1,19 +1,12 @@
-# netlify.toml (Corrected Syntax)
+# netlify.toml (Simplified and Foolproof)
 
 [build]
-  # This command remains the same. It correctly prepares your files.
-  command = "mkdir -p netlify/functions && cp -r src/* netlify/functions/"
-  functions = "netlify/functions"
+  # The directory where your serverless functions are located.
+  # We will manually create this folder and put our handler inside.
+  functions = "functions"
 
-# Use a wildcard to apply these settings to ALL functions in this project.
-# This is the correct way to set the Node.js version and bundler.
-[functions."*"]
-  node_bundler = "esbuild"
-  node_target = "es2022"
-  node_version = "20"
-
-# This redirect rule makes your API accessible at a clean URL.
-# For example: your-site.netlify.app/users instead of /.netlify/functions/api/users
+# This rule makes your API accessible at a clean URL.
+# For example: your-site.netlify.app/users instead of /functions/api/users
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/api/:splat"

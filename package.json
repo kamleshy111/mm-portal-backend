@@ -2,11 +2,11 @@
     "name": "express-api-template",
     "version": "1.0.0",
     "description": "Scalable Express.js API template with JWT authentication and webhooks.",
-    "main": "src/server.js",
+    "main": "functions/server.js",
     "type": "module",
     "scripts": {
-        "start": "node src/server.js",
-        "dev": "nodemon src/server.js"
+        "start": "node functions/server.js",
+        "dev": "nodemon functions/server.js"
     },
     "keywords": [
         "express",
