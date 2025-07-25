@@ -1,13 +1,7 @@
-# netlify.toml (Final Build-Step Version)
-
 [build]
-  # 1. Run our new build script from package.json
   command = "npm run build"
-  
-  # 2. Tell Netlify where the final, bundled function is.
   functions = "netlify/functions"
 
-# This redirect rule remains the same.
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/api/:splat"
