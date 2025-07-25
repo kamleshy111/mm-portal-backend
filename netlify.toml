@@ -1,0 +1,15 @@
+# netlify.toml (Corrected and Simpler)
+[build]
+  # This command tells Netlify to take your src/api.js file and place it
+  # into the required functions directory.
+  command = "mkdir -p netlify/functions && cp src/api.js netlify/functions/"
+  
+  # The directory where the built functions are located.
+  functions = "netlify/functions"
+
+# This is a redirect rule that makes your function accessible
+# at a clean URL. It rewrites all requests to the main function.
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
