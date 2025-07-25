@@ -1,21 +1,13 @@
-# netlify.toml (Final Corrected Version)
+# netlify.toml (Final Build-Step Version)
 
 [build]
-  # We will stick with the manual file structure, as it's the most reliable.
-  # This tells Netlify where to find your functions.
-  functions = "functions"
-
-# Use the wildcard to apply settings to all functions.
-[functions."*"]
-  # This explicitly tells the bundler to NOT bundle axios.
-  # It will be included as a separate module in node_modules.
-  external_node_modules = ["axios"]
+  # 1. Run our new build script from package.json
+  command = "npm run build"
   
-  # We can still specify the Node.js version for consistency.
-  node_version = "20"
-  # We can remove the bundler and target settings, as they can sometimes
-  # conflict with the external module strategy. Let's use Netlify's defaults.
+  # 2. Tell Netlify where the final, bundled function is.
+  functions = "netlify/functions"
 
+# This redirect rule remains the same.
 [[redirects]]
   from = "/*"
   to = "/.netlify/functions/api/:splat"
