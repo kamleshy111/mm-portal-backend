@@ -2,11 +2,12 @@
   command = "echo Building Functions"
 
 [functions]
+  directory = "netlify/functions"
   node_bundler = "esbuild"
   external_node_modules = ["express", "serverless-http"]
 
 [[redirects]]
-  from = "/*"
+  from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
   force = true
