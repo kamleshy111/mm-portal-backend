@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
     res.status(200).json({ status: 'ok', message: 'API is healthy and running!' });
 });
 
+app.get('/test-api', (req, res) => {
+    res.status(200).json({ status: 'ok', message: 'API is healthy and running!' });
+});
+
 
 // --- Global Error Handler ---
 // This middleware catches all errors passed to next()
