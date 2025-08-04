@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express from "express";
 import cors from 'cors';
 import { env } from './config/environment.js';
 import { errorHandler } from './api/middlewares/errorHandler.middleware.js';
@@ -28,11 +28,6 @@ app.get('/test-api', (req, res) => {
 });
 
 app.use('/api', apiRouter);
-
-const router = Router();
-router.get("/hello", (req, res) => res.send("Hello World!"));
-
-app.use("/api11/", router);
 
 app.use(errorHandler);
 export { app };
