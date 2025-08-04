@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/test-api', (req, res) => {
-    res.status(200).json({ status: 'ok', message: 'API is healthy and running!' });
+    res.json({ status: 'ok', message: 'API is healthy and running!' });
 });
 
 app.use(errorHandler);
