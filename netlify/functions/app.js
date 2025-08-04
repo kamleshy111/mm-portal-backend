@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: true, limit: '16kb' }));
 // Serve static files from the 'public' directory
 app.use('/public', express.static('public'));
 
+app.use('/api/', apiRouter);
 
 // --- Health Check Route ---
 app.get('/', (req, res) => {
@@ -32,5 +33,5 @@ app.get('/test', (req, res) => {
 app.use(errorHandler);
 
 //app.use("/api/", router);
-app.use('/api/', apiRouter);
+
 export { app };
