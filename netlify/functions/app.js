@@ -15,6 +15,7 @@ app.use(express.json({ limit: '16kb' }));
 
 // Parse incoming URL-encoded requests with a size limit
 app.use(express.urlencoded({ extended: true, limit: '16kb' }));
+app.use('/api', Router);
 
 // --- Health Check Route ---
 app.get('/', (req, res) => {
