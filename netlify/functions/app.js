@@ -44,7 +44,6 @@ export { app };*/
 
 
 import express, { Router } from "express";
-import serverless from "serverless-http";
 
 const api = express();
 api.use(express.json()); // For parsing JSON request bodies
@@ -102,5 +101,3 @@ router.delete("/:id", (req, res) => {
 });
 
 api.use("/api/", router);
-
-export const handler = serverless(api);
