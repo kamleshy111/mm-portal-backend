@@ -2,8 +2,12 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/me', (req, res) => {
-    res.json({ status: 'ok', message: 'API is healthy and running me!' });
+// Route: GET /api/
+router.get('/', (req, res) => {
+    res.status(200).json({ status: 'ok', message: 'API is healthy and running!' });
 });
+
+// Add more routes here, like:
+// router.get('/users', ...)
 
 export default router;
