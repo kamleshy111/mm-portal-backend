@@ -5,7 +5,6 @@ import { errorHandler } from './api/middlewares/errorHandler.middleware.js';
 import apiRouter from './api/routes/index.js';
 
 const app = express();
-//const router = Router();
 // Enable Cross-Origin Resource Sharing (CORS)
 app.use(cors({
     origin: env.CORS_ORIGIN,
@@ -23,6 +22,9 @@ app.use('/public', express.static('public'));
 
 // --- Health Check Route ---
 app.get('/', (req, res) => {
+    res.status(200).json({ status: 'ok', message: 'API is healthy and running!' });
+});
+app.get('/test', (req, res) => {
     res.status(200).json({ status: 'ok', message: 'API is healthy and running!' });
 });
 
