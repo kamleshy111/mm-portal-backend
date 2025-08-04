@@ -30,7 +30,7 @@ app.get('/test', (req, res) => {
 });
 
 
-app.use(errorHandler);
+//app.use(errorHandler);
 
 //app.use("/api/", router);
 
