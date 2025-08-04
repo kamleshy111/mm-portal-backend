@@ -17,11 +17,11 @@ app.use(express.json({ limit: '16kb' }));
 app.use(express.urlencoded({ extended: true, limit: '16kb' }));
 
 // --- Health Check Route ---
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.status(200).json({ status: 'ok', message: 'API is healthy and running!' });
 });
 
-app.get('/test-api', (req, res) => {
+router.get('/test-api', (req, res) => {
     res.json({ status: 'ok', message: 'API is healthy and running!' });
 });
 
