@@ -1,28 +1,28 @@
-import express from "express";
+import express, { Router } from "express";
 import cors from 'cors';
-import { env } from './config/environment.js'; // Make sure this returns a valid object
-import apiRouter from './api/routes/index.js'; // ✅ Correct path to your router
+import { env } from './config/environment.js';
 import { errorHandler } from './api/middlewares/errorHandler.middleware.js';
-
 const app = express();
+const router = Router();
+// Enable Cross-Origin Resource Sharing (CORS)
+app.use(cors({
+    origin: env.CORS_ORIGIN,
+    credentials: true,
+}));
 
-app.use(cors({ origin: env.CORS_ORIGIN, credentials: true }));
+// Parse incoming JSON requests with a size limit
 app.use(express.json({ limit: '16kb' }));
+
+// Parse incoming URL-encoded requests with a size limit
 app.use(express.urlencoded({ extended: true, limit: '16kb' }));
-app.use('/public', express.static('public'));
 
-// Health Check
-app.get('/', (req, res) => {
-    res.status(200).json({ status: 'ok', message: 'Root check OK' });
-});
-app.get('/test', (req, res) => {
-    res.status(200).json({ status: 'ok', message: 'Test route OK' });
+// --- Health Check Route ---
+router.get('/', (req, res) => {
+    res.status(200).json({ status: 'ok', message: 'API is healthy and running!' });
 });
 
-// ✅ Mount router
-app.use('/api', apiRouter);
 
-// ✅ Error handler should be last
 app.use(errorHandler);
 
+app.use("/api/", router);
 export { app };
