@@ -101,3 +101,4 @@ router.delete("/:id", (req, res) => {
 });
 
 api.use("/api/", router);
+export { api };
