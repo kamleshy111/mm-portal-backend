@@ -3,7 +3,7 @@ import cors from 'cors';
 import { env } from './config/environment.js';
 import { errorHandler } from './api/middlewares/errorHandler.middleware.js';
 const app = express();
-
+const router = Router();
 // Enable Cross-Origin Resource Sharing (CORS)
 app.use(cors({
     origin: env.CORS_ORIGIN,
@@ -15,7 +15,6 @@ app.use(express.json({ limit: '16kb' }));
 
 // Parse incoming URL-encoded requests with a size limit
 app.use(express.urlencoded({ extended: true, limit: '16kb' }));
-app.use('/api', Router);
 
 // --- Health Check Route ---
 app.get('/', (req, res) => {
@@ -28,6 +27,7 @@ app.get('/test-api', (req, res) => {
 
 app.use(errorHandler);
 
+app.use("/api/", router);
 export { app };
 
 /*
@@ -54,10 +54,5 @@ router.get("/:id", (req, res) => {
 
     res.json(record);
 });
-
-
-
-api.use("/api/", router);
-export { api };
 
  */
