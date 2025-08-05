@@ -4,6 +4,7 @@ import { env } from './config/environment.js';
 import { errorHandler } from './api/middlewares/errorHandler.middleware.js';
 import apiRouter from './api/routes/index.js';
 import {parsesIntoJson} from "./api/middlewares/parsesIntoJson.middleware.js";
+import {dbConnectMiddleware} from "./api/middlewares/dbConnect.middleware.js";
 
 const app = express();
 app.use(cors({
@@ -13,6 +14,8 @@ app.use(cors({
 
 app.use(express.json());
 app.use(parsesIntoJson);
+app.use(dbConnectMiddleware);
+
 // Parse incoming URL-encoded requests with a size limit
 app.use(express.urlencoded({ extended: true, limit: '16kb' }));
 

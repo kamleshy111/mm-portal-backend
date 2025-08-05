@@ -1,5 +1,7 @@
 import { User } from '../models/user.model.js';
 import { ApiError } from '../utils/apiError.js';
+import {logger} from "../utils/logger.js";
+import {connectDB} from "../config/index.js";
 
 /**
  * Creates a new user in the database after checking for existence.
@@ -30,7 +32,6 @@ const createUser = async (username, email, password) => {
  * @returns {Promise<User|null>} The user document or null if not found.
  */
 const findUserByEmail = async (email) => {
-    return "hello";
   return User.findOne({ email }).select('+password');
 };
 

@@ -1,10 +1,9 @@
-// src/services/auth.service.js
-
 import { userService } from './user.service.js';
 import { webhookService } from './webhook.service.js';
 import { ApiError } from '../utils/apiError.js';
 import jwt from 'jsonwebtoken';
 import { env } from '../config/environment.js';
+import {logger} from "../utils/logger.js";
 
 /**
  * Generates a JSON Web Token for a given user ID.
@@ -25,10 +24,10 @@ const generateToken = (userId) => {
  * @returns {Promise<{user: object, token: string}>} The user object and JWT.
  */
 const register = async (username, email, password) => {
-  // 1. Create the user in the database
+  //Create the user in the database
   const user = await userService.createUser(username, email, password);
 
-  // 2. Dispatch the registration webhook (fire-and-forget)
+  //Dispatch the registration webhook (fire-and-forget)
   webhookService.sendRegistrationWebhook({
     userId: user._id,
     username: user.username,
@@ -36,10 +35,10 @@ const register = async (username, email, password) => {
     registeredAt: user.createdAt,
   });
 
-  // 3. Generate a token for the new user
+  //Generate a token for the new user
   const token = generateToken(user._id);
 
-  // 4. Prepare the user object for the response (remove password)
+  //Prepare the user object for the response (remove password)
   const userResponse = user.toObject();
   delete userResponse.password;
 
@@ -53,23 +52,20 @@ const register = async (username, email, password) => {
  * @returns {Promise<{user: object, token: string}>} The user object and JWT.
  */
 const login = async (email, password) => {
-  return "dsdsfdsf0";
-  // 1. Find the user by email
   const user = await userService.findUserByEmail(email);
   if (!user) {
     throw new ApiError(401, 'Invalid email or password.'); // Use a generic message for security
   }
 
-  // 2. Compare the provided password with the stored hash
   const isPasswordCorrect = await user.isPasswordCorrect(password);
   if (!isPasswordCorrect) {
     throw new ApiError(401, 'Invalid email or password.');
   }
 
-  // 3. Generate a token
+  //Generate a token
   const token = generateToken(user._id);
 
-  // 4. Prepare the user object for the response
+  //Prepare the user object for the response
   const userResponse = user.toObject();
   delete userResponse.password;
 
