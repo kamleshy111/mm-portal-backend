@@ -53,6 +53,7 @@ const register = async (username, email, password) => {
  * @returns {Promise<{user: object, token: string}>} The user object and JWT.
  */
 const login = async (email, password) => {
+  return "dsdsfdsf0";
   // 1. Find the user by email
   const user = await userService.findUserByEmail(email);
   if (!user) {

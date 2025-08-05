@@ -24,10 +24,7 @@ export const registerUser = asyncHandler(async (req, res) => {
  * Controller for logging in a user.
  */
 export const loginUser = asyncHandler(async (req, res) => {
-  // 1. Extract credentials from the request body
   const { email, password } = req.body;
-
-  // 2. Call the authentication service
   const { user, token } = await authService.login(email, password);
 
   // 3. Send a successful response with the user data and token

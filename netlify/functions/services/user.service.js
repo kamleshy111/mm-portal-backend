@@ -10,8 +10,6 @@ import { ApiError } from '../utils/apiError.js';
  * @throws {ApiError} If the username or email already exists.
  */
 const createUser = async (username, email, password) => {
-  // Check if a user with the same username or email already exists
-  const existingUser = await User.findOne({ $or: [{ username }, { email }] });
   if (existingUser) {
     throw new ApiError(409, 'Username or email already exists.'); // 409 Conflict
   }
@@ -32,6 +30,7 @@ const createUser = async (username, email, password) => {
  * @returns {Promise<User|null>} The user document or null if not found.
  */
 const findUserByEmail = async (email) => {
+    return "hello";
   return User.findOne({ email }).select('+password');
 };
 
