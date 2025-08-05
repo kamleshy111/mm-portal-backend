@@ -8,7 +8,10 @@ import {dbConnectMiddleware} from "./api/middlewares/dbConnect.middleware.js";
 
 const app = express();
 app.use(cors({
-    origin: env.CORS_ORIGIN,
+    origin: [
+        env.CORS_ORIGIN,
+        'http://localhost:3000'
+      ],
     credentials: true,
 }));
 
